@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">How to Survive Darn-Near Anyplace</string>
+    <string name="tier_select_title">Select Tier Level</string>
+    <string name="tier_one">T1</string>
+    <string name="tier_two">T2</string>
+    <string name="tier_three">T3</string>
+</resources>
