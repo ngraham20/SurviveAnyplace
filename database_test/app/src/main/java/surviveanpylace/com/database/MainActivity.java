@@ -4,6 +4,8 @@ import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,52 +17,34 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatabaseHandler db = new DatabaseHandler(this);
+        Button button_t1 = findViewById(R.id.button_tier1);
+        Button button_t2 = findViewById(R.id.button_tier2);
+        Button button_t3 = findViewById(R.id.button_tier3);
+
+        final DatabaseHandler db = new DatabaseHandler(this);
+
         db.readDatabase(this);
-//
-//        /**
-//         * CRUD Operations
-//         * */
-//        // Inserting Contacts
-//        Log.d("Insert: ", "Inserting ..");
-//        db.addContact(new Contact("Ravi", "9100000000"));
-//        db.addContact(new Contact("Srinivas", "9199999999"));
-//        db.addContact(new Contact("Tommy", "9522222222"));
-//        db.addContact(new Contact("Karthik", "9533333333"));
-//
-//        // Reading all contacts
-//        Log.d("Reading: ", "Reading all contacts..");
-//        List<Contact> contacts = db.getAllContacts();
-//
-//        for (Contact cn : contacts) {
-//            String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Phone: " + cn.getPhoneNumber();
-//            // Writing Contacts to log
-//            Log.d("Name: ", log);
-//        }
 
-//        DataBaseHelper myDbHelper;
-//        myDbHelper = new DataBaseHelper(this);
-//
-//        try {
-//
-//            myDbHelper.createDataBase();
-//
-//        } catch (IOException ioe) {
-//
-//            throw new Error("Unable to create sqldatabase");
-//
-//        }
-//
-//        try {
-//
-//            myDbHelper.openDataBase();
-//
-//        }catch(SQLException sqle){
-//
-//            throw sqle;
-//
-//        }
+        button_t1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // we want it to bring up everything from tier one
+                db.getTierOne();
+            }
+        });
 
-//        dbHelper myDb = new dbHelper(this);
+        button_t2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Bring up everything from tier two
+            }
+        });
+
+        button_t3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //we want this to bring up everything from Tier three
+            }
+        });
     }
 }

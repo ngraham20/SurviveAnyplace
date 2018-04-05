@@ -12,8 +12,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by loder on 2/23/2018.
@@ -172,5 +175,35 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.delete(TABLE_DICTIONARY, KEY_ID + " = ?",
                 new String[] { String.valueOf(contact.getID()) });
         db.close();
+    }
+
+    public Hashtable<String, String> getTierOne() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Hashtable<String, String> data = new Hashtable<>();
+
+        //String columns[] = new String["id", "en", "fr"];
+        Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr"},
+                "tier='T1'", null, null, null, "id");
+
+        while(cursor.moveToNext())
+        {
+            int index = cursor.getColumnIndexOrThrow("id");
+            int id = cursor.getInt(index);
+
+            index = cursor.getColumnIndexOrThrow("en");
+            String en = cursor.getString(index);
+
+            index = cursor.getColumnIndexOrThrow("fr");
+            String fr = cursor.getString(index);
+
+            data.put("id", String.valueOf(id));
+            data.put("en", en);
+            data.put("fr", fr);
+
+        }
+        cursor.close();
+        return data;
     }
 }
