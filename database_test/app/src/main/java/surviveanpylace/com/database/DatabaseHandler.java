@@ -177,15 +177,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public Hashtable<String, String> getTierOne() {
+    public List<Hashtable<String, String>> getTierOne() {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Hashtable<String, String> data = new Hashtable<>();
+//        Hashtable<String, String> data = new Hashtable<>();
+
+        List<Hashtable<String, String>> data = new ArrayList<>();
 
         //String columns[] = new String["id", "en", "fr"];
-        Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr"},
-                "tier='T1'", null, null, null, "id");
+        Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr", "tier"},
+                "tier='T1'", null, null, null, null);
 
         while(cursor.moveToNext())
         {
@@ -198,12 +200,77 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             index = cursor.getColumnIndexOrThrow("fr");
             String fr = cursor.getString(index);
 
-            data.put("id", String.valueOf(id));
+            index = cursor.getColumnIndexOrThrow("tier");
+            String tier = cursor.getString(index);
+
+            Hashtable<String, String> hsh = new Hashtable<>();
+
+            hsh.put("id", String.valueOf(id));
+            hsh.put("en", en);
+            hsh.put("fr", fr);
+            hsh.put("tier", tier);
+
+            data.add(hsh);
+        }
+        cursor.close();
+        return data;
+    }
+
+    public Hashtable<String, String> getTierTwo() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Hashtable<String, String> data = new Hashtable<>();
+
+        Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr"},
+                "tier= 'T2'", null, null, null, "id");
+        while (cursor.moveToNext())
+        {
+            int index = cursor.getColumnIndexOrThrow("id");
+            int id = cursor.getInt(index);
+
+            index = cursor.getColumnIndexOrThrow("en");
+            String en = cursor.getString(index);
+
+            index = cursor.getColumnIndexOrThrow("fr");
+            String fr = cursor.getString(index);
+
+            data.put ("id", String. valueOf(id));
             data.put("en", en);
             data.put("fr", fr);
 
         }
         cursor.close();
         return data;
+
     }
-}
+
+    public Hashtable<String, String> getTierThree() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Hashtable<String, String> data = new Hashtable<>();
+
+        Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr"},
+                "tier='T3'", null, null, null, "id");
+        {
+            int index = cursor.getColumnIndexOrThrow("id");
+            int id = cursor.getInt(index);
+
+            index = cursor.getColumnIndexOrThrow("en");
+            String en = cursor.getString(index);
+
+            index = cursor.getColumnIndexOrThrow("fr");
+            String fr = cursor.getString(index);
+
+            data.put ("id", String. valueOf(id));
+            data.put ("en", en);
+            data.put ("fr", fr);
+         }
+        cursor.close();
+        return data;
+
+        }
+
+    }
+

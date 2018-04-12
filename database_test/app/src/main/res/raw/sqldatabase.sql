@@ -48,5 +48,3 @@ INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (7, 'How do I get to th
 INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (8, 'How do I get to the airport?', '¿Cómo voy al aeropuerto?', 'Comment allez-vous a l''aeroport?', 'Wie bekomme ich zum flughafen', 'T1');
 INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (31, 'Where can I buy some groceries?', '¿Dónde puedo comprar comida?', 'Où est-ce que vous faites le courses?', 'Wo kann ich einige lebensmittel kaufen', 'T2');
 INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (6, 'I would like some fruit', 'Me gustaría fruta, por favór', 'Je veux du fruits', 'Ich mochte etwas Obst', 'T1');
-INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (57, 'Where is the baggage claim?', '¿Dónde está la recogida de equipajes?', NULL, NULL, 'T1');
-INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (58, 'How do I get to the theatre?', NULL, 'Comment allez-vous au theatre?', NULL, 'T2');
