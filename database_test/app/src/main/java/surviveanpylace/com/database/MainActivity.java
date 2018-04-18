@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // we want it to bring up everything from tier one
                 db.getTierOne();
+                System.out.println("Generated Tier One Stuff");
             }
         });
 
