@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Bring up everything from tier two
+                db.getTierTwo();
             }
         });
 
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //we want this to bring up everything from Tier three
+                db.getTierThree();
             }
         });
     }
