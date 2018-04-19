@@ -2,10 +2,13 @@ package surviveanpylace.com.database;
 
 import android.database.SQLException;
 import android.support.v7.app.AppCompatActivity;
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         Button button_t1 = findViewById(R.id.button_tier1);
         Button button_t2 = findViewById(R.id.button_tier2);
         Button button_t3 = findViewById(R.id.button_tier3);
+        ListView testListView = findViewById(R.id.testListView);
 
         final DatabaseHandler db = new DatabaseHandler(this);
 
@@ -49,5 +53,8 @@ public class MainActivity extends AppCompatActivity {
                 db.getTierThree();
             }
         });
+    }
+
+    private void displayResultList() {
     }
 }

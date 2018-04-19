@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.SimpleCursorAdapter;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -177,13 +178,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Hashtable<String, String>> getTierOne() {
+    public ArrayList<String> getTierOne() {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
 //        Hashtable<String, String> data = new Hashtable<>();
 
-        List<Hashtable<String, String>> data = new ArrayList<>();
+        ArrayList<String> data = new ArrayList<>();
 
         //String columns[] = new String["id", "en", "fr"];
         Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr", "tier"},
@@ -191,6 +192,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         while(cursor.moveToNext())
         {
+
             int index = cursor.getColumnIndexOrThrow("id");
             int id = cursor.getInt(index);
 
@@ -203,18 +205,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             index = cursor.getColumnIndexOrThrow("tier");
             String tier = cursor.getString(index);
 
-            Hashtable<String, String> hsh = new Hashtable<>();
+//            Hashtable<String, String> hsh = new Hashtable<>();
+//
+//            hsh.put("id", String.valueOf(id));
+//            hsh.put("en", en);
+//            hsh.put("fr", fr);
+//            hsh.put("tier", tier);
 
-            hsh.put("id", String.valueOf(id));
-            hsh.put("en", en);
-            hsh.put("fr", fr);
-            hsh.put("tier", tier);
-
-            data.add(hsh);
+//            data.add(hsh);
+            String result = "ID: " + id + " EN: " + en + " FR: " + fr + " TIER: " + tier;
+            data.add(result);
         }
         cursor.close();
         return data;
     }
+
+//    public ArrayList<String> getTierOne() {
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//
+////        Hashtable<String, String> data = new Hashtable<>();
+//
+//        List<Hashtable<String, String>> data = new ArrayList<>();
+//
+//        //String columns[] = new String["id", "en", "fr"];
+//        Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr", "tier"},
+//                "tier='T1'", null, null, null, null);
+
+//        SimpleCursorAdapter adapter = new SimpleCursorAdapter(this,
+//                R.layout.activity_main,
+//                cursor,
+//                new String[]{"id", "en", "fr"},
+//                null
+//                )
+//    }
 
     public Hashtable<String, String> getTierTwo() {
 
