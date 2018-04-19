@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS Dictionary;
+CREATE TABLE Dictionary(id bigint NOT NULL, en text, es text, fr text, du text, tier tiers NOT NULL);
 INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (39, 'What kind of art is this?', '¿Qué tipo de arte es?', 'Quel mouvement est ce art?', 'Welche Art von Kunst ist das', 'T3');
 INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (23, 'Which is the fastest way to travel there?', '¿Cuál es la manera más rapida para viajar?', 'Quelle route est le plus rapidement?', 'Was ist der schnellste weg, um dorthin zu gelangen', 'T2');
 INSERT INTO dictionary (id, en, es, fr, du, tier) VALUES (9, 'How do I get to a restaurant?', '¿Cómo voy a un restaurante?', 'Comment allez-vous au restaurant?', 'Wie bekomme ich in ein restaurant', 'T1');
