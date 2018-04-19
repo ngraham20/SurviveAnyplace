@@ -19,8 +19,10 @@ public class MainActivity extends AppCompatActivity {
         lv = (ListView) (findViewById(R.id.dynListview));
 
         ArrayList<String> my_list = new ArrayList<>();
-        my_list.add("foo");
-        my_list.add("bar");
+
+        for (int i = 0; i < 100; i++) {
+            my_list.add("Item: " + String.valueOf(i));
+        }
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(
                 this,
