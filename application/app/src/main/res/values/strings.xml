@@ -4,4 +4,12 @@
     <string name="tier_one">T1</string>
     <string name="tier_two">T2</string>
     <string name="tier_three">T3</string>
+    <string name="title_activity_scrolly">scrolly</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_select_tier">SelectTier</string>
 </resources>

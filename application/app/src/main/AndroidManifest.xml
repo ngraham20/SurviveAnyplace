@@ -16,7 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".select_tier"></activity>
+        <activity android:name=".SelectLaguage" />
+        <activity
+            android:name=".scrolly"
+            android:label="@string/title_activity_scrolly"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SelectTier"></activity>
     </application>
 
 </manifest>
