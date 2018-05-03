@@ -69,7 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
         // db.execSQL(DATABASE_CONTENT);
     }
 
-    public ArrayList<String> getTier(int tier_num) {
+    public ArrayList<String> getTier(String native_lang, String foreign_lang, int tier_num) {
 
         if (tier_num < 1 || tier_num > 3) {
             // TODO throw error here
@@ -82,27 +82,27 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
 
             ArrayList<String> data = new ArrayList<>();
 
-            Cursor cursor = db.query("Dictionary", new String[]{"id", "en", "fr", "tier"},
-                    "tier='T" + tier_num + "'", null, null, null, "id");
+            Cursor cursor = db.query("Dictionary", new String[]{native_lang, foreign_lang},
+                    "tier='T" + tier_num + "'", null, null, null, native_lang);
 
 //        String query = "SELECT id, en, fr, tier FROM Dictionary WHERE tier='T1' ORDER BY id;";
 //        Cursor cursor = db.rawQuery(query, null);
 
             while (cursor.moveToNext()) {
 
-                int index = cursor.getColumnIndexOrThrow("id");
-                int id = cursor.getInt(index);
+//                int index = cursor.getColumnIndexOrThrow("id");
+//                int id = cursor.getInt(index);
 
-                index = cursor.getColumnIndexOrThrow("en");
-                String en = cursor.getString(index);
+                int index = cursor.getColumnIndexOrThrow(native_lang);
+                String result = cursor.getString(index);
 
-                index = cursor.getColumnIndexOrThrow("fr");
-                String fr = cursor.getString(index);
+//                index = cursor.getColumnIndexOrThrow(foreign_lang);
+//                String result = cursor.getString(index);
 
-                index = cursor.getColumnIndexOrThrow("tier");
-                String tier = cursor.getString(index);
+//                index = cursor.getColumnIndexOrThrow("tier");
+//                String tier = cursor.getString(index);
 
-                String result = "ID: " + id + " EN: " + en + " FR: " + fr + " TIER: " + tier;
+//                String result = fr;
                 data.add(result);
             }
             cursor.close();
@@ -118,16 +118,16 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
     public void createDatabase(SQLiteDatabase db) {
         String query = "SELECT CASE" +
                 "WHEN en LIKE 'How do I get to%' THEN 'How do I get to...'" +
-        "WHEN en LIKE  'Where is%' THEN 'Where is ...'" +
-        "WHEN en LIKE 'Where can I%' THEN 'Where can I buy...'" +
-        "WHEN en LIKE 'I would like%' THEN 'Ordering food'" +
-        "WHEN en LIKE 'How can I get to%' THEN 'How do I get to...'" +
-        "WHEN en LIKE '%hurts' THEN 'Something hurts'" +
+                "WHEN en LIKE  'Where is%' THEN 'Where is ...'" +
+                "WHEN en LIKE 'Where can I%' THEN 'Where can I buy...'" +
+                "WHEN en LIKE 'I would like%' THEN 'Ordering food'" +
+                "WHEN en LIKE 'How can I get to%' THEN 'How do I get to...'" +
+                "WHEN en LIKE '%hurts' THEN 'Something hurts'" +
                 "ELSE 'Others'"+
-                "END                    AS en"
+                "END                    AS en";
 
          String order = "FROM 'dictionary'" +
-        "GROUP BY CASE" +
+                "GROUP BY CASE" +
                 "WHEN en LIKE 'How do I get to%' THEN 'How do I get to...'" +
                 "WHEN en LIKE  'Where is%' THEN 'Where is ...'" +
                 "WHEN en LIKE 'Where can I%' THEN 'Where can I buy...'" +

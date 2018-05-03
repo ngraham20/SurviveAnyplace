@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SelectLaguage" />
+        <activity android:name=".SelectLanguage" />
         <activity
             android:name=".scrolly"
             android:label="@string/title_activity_scrolly"

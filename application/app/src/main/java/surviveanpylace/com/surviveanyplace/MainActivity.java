@@ -6,11 +6,14 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String PREFS_NAME = "preferences";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(getBaseContext(), SelectTier.class));
+        startActivity(new Intent(getBaseContext(), SelectLanguage.class));
     }
+
 }

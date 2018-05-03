@@ -1,6 +1,8 @@
 package surviveanpylace.com.surviveanyplace;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -35,9 +37,13 @@ public class scrolly extends AppCompatActivity
 
         handler = new DatabaseHandler(this);
         handler.loadSqlDatabase(this);
+
         int tier_int = getIntent().getIntExtra("EXTRA_TIER", 0);
+        SharedPreferences language = getSharedPreferences(MainActivity.PREFS_NAME, Context.MODE_PRIVATE);
+        String native_lang = language.getString("language", "default");
+
         //int tier_int = Integer.valueOf(tier_string); todo figure out how to sent extras
-        ArrayList<String> results = handler.getTier(tier_int);
+        ArrayList<String> results = handler.getTier(native_lang, "fr", tier_int);
         updateListView(results);
 
         FloatingActionButton fab = findViewById(R.id.fab);
