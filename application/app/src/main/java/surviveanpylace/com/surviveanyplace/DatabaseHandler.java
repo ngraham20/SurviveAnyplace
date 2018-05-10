@@ -69,7 +69,7 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
         // db.execSQL(DATABASE_CONTENT);
     }
 
-    public ArrayList<String> getTier(String native_lang, String foreign_lang, int tier_num) {
+    public ArrayList<ArrayList<String>> getTier(String native_lang, String foreign_lang, int tier_num) {
 
         if (tier_num < 1 || tier_num > 3) {
             // TODO throw error here
@@ -80,7 +80,10 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
 
             SQLiteDatabase db = this.getReadableDatabase();
 
-            ArrayList<String> data = new ArrayList<>();
+            ArrayList<ArrayList<String>> data = new ArrayList<>();
+
+            data.add(new ArrayList<String>());
+            data.add(new ArrayList<String>());
 
             Cursor cursor = db.query("Dictionary", new String[]{native_lang, foreign_lang},
                     "tier='T" + tier_num + "'", null, null, null, native_lang);
@@ -96,6 +99,15 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
                 int index = cursor.getColumnIndexOrThrow(native_lang);
                 String result = cursor.getString(index);
 
+                data.get(0).add(result);
+
+                index = cursor.getColumnIndexOrThrow(foreign_lang);
+                result = cursor.getString(index);
+
+                data.get(1).add(result);
+
+                //data.add(result);
+
 //                index = cursor.getColumnIndexOrThrow(foreign_lang);
 //                String result = cursor.getString(index);
 
@@ -103,7 +115,7 @@ public class DatabaseHandler extends SQLiteOpenHelper   {
 //                String tier = cursor.getString(index);
 
 //                String result = fr;
-                data.add(result);
+                //data.add(result);
             }
             cursor.close();
             return data;

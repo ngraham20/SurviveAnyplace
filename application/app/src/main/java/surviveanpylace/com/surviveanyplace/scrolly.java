@@ -15,8 +15,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,9 @@ public class scrolly extends AppCompatActivity
 
     private ListView lv;
     private DatabaseHandler handler;
+    private Toast m_currentToast;
+    private String native_trans;
+    private String foreign_trans;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +49,8 @@ public class scrolly extends AppCompatActivity
         String native_lang = language.getString("language", "default");
 
         //int tier_int = Integer.valueOf(tier_string); todo figure out how to sent extras
-        ArrayList<String> results = handler.getTier(native_lang, "fr", tier_int);
-        updateListView(results);
+        final ArrayList<ArrayList<String>> results = handler.getTier(native_lang, "fr", tier_int);
+        updateListView(results.get(0));
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +70,25 @@ public class scrolly extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                    String item = ((TextView)view).getText().toString();
+                    int index = results.get(0).indexOf(item);
+                    String translation = results.get(1).get(index);
+
+                    showToast(translation);
+            }
+        });
+    }
+
+    void showToast(String text) {
+        if (m_currentToast != null) {
+            m_currentToast.cancel();
+        }
+        m_currentToast = Toast.makeText(this, text, Toast.LENGTH_LONG);
+        m_currentToast.show();
     }
 
     @Override
